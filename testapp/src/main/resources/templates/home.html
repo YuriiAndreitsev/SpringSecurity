@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>HomePage!</title>
+
+</head>
+<body>
+	HOME PAGE
+	<hr>
+	<p>
+		Logged user: <span sec:authentication="name"> Name Here</span>
+	</p>
+	<br>
+	<p>
+		Roles: <span sec:authentication="principal.authorities">Role
+			Here</span>
+	</p>
+	<div sec:authorize="hasRole('MANAGER')">
+		<hr>
+		<a th:href="@{/leaders}"> Leadership Meeting </a> (Only For Managers)
+		<hr>
+	</div>
+	<div sec:authorize="hasRole('ADMIN')">
+	<a th:href="@{/admins}"> Admins Meeting </a> (Only For Admins)
+	<hr>
+	</div>
+	<form th:action="@{/logout}" method="post">
+		<input type='hidden' name='Logout' /> <input type='submit'
+			value='logout' />
+	</form>
+</body>
+</html>
